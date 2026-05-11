@@ -5,7 +5,7 @@ fi
 
 hunt() {
   emulate -L zsh
-  local -a fzf_opts=(--reverse --style full)
+  local -a fzf_opts=(--reverse --style full --preview-shell=bash)
 
   # ──────────────────────────────────────────────────────────────────────
   # Configuration via environment variables (all optional)

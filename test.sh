@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-docker run --rm -it ubuntu:latest bash -c '
+docker run --rm -it -e DEBIAN_FRONTEND=noninteractive -e TZ=Etc/UTC ubuntu:latest bash -c '
   set -euo pipefail
 
-  apt-get update && apt-get install -y zsh tree vim git curl
+  apt update && apt install -y zsh tree vim git curl
 
   # Set zsh as default shell
   chsh -s /usr/bin/zsh
