@@ -1,5 +1,5 @@
 export FZF_DEFAULT_OPTS="--reverse --style full"
-h() {
+hunt() {
   emulate -L zsh
 
   # ──────────────────────────────────────────────────────────────────────
@@ -9,7 +9,7 @@ h() {
   #   HUNT_PREVIEW_POSITION Where preview sits: right, left, up, down (default: right)
   #   HUNT_PREVIEW_SIZE     Preview size as percent 1-99 (default: 40)
   #
-  # Usage: h [directory]
+  # Usage: hunt [directory]
   #
   # Keybindings:
   #   ctrl-t:files  ctrl-g:grep  ctrl-r:recent  ctrl-e:explore  ctrl-j:jump
