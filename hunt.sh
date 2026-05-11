@@ -1,6 +1,6 @@
 hunt() {
   emulate -L zsh
-  local fzf_opts="--reverse --style full"
+  local -a fzf_opts=(--reverse --style full)
 
   # ──────────────────────────────────────────────────────────────────────
   # Configuration via environment variables (all optional)
@@ -67,7 +67,7 @@ EOF
     case "$mode" in
       grep)
         raw_result=$(
-          fzf $fzf_opts --ansi \
+          fzf "${fzf_opts[@]}" --ansi \
             --color="$color" \
             --info=hidden \
             --input-label ' Input ' --header-label ' Help ' \
@@ -125,7 +125,7 @@ EOF
                     printf '\033[0;37m%s\033[0m\n' "$name"
                   fi
                 done
-          } | fzf $fzf_opts --ansi \
+          } | fzf "${fzf_opts[@]}" --ansi \
             --color="$color" \
             --info=hidden \
             --input-label ' Input ' --header-label ' Help ' \
@@ -159,7 +159,7 @@ EOF
 
       *)
         raw_result=$(
-          fzf $fzf_opts --ansi \
+          fzf "${fzf_opts[@]}" --ansi \
             --color="$color" \
             --info=hidden \
             --input-label ' Input ' --header-label ' Help ' \
@@ -214,7 +214,7 @@ EOF
         local target
 
         target=$(
-          zoxide query -l | fzf $fzf_opts \
+          zoxide query -l | fzf "${fzf_opts[@]}" \
             --ansi \
             --color="$color" \
             --info=hidden \
