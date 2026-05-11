@@ -22,17 +22,7 @@ hunt() {
   local preview_pos="${HUNT_PREVIEW_POSITION:-right}"
   local preview_size="${HUNT_PREVIEW_SIZE:-40}"
 
-  local preview_border
-  case "$preview_pos" in
-    right) preview_border="border-left" ;;
-    left)  preview_border="border-right" ;;
-    up)    preview_border="border-bottom" ;;
-    down)  preview_border="border-top" ;;
-    *)     preview_pos="right"; preview_border="border-left" ;;
-  esac
-
-  # TODO: added myself, so there is always a
-  preview_border="border"
+  local preview_border="border"
 
   local preview_window="${preview_pos}:${preview_size}%"
   local preview_full="${preview_window},${preview_border}"
@@ -42,7 +32,12 @@ hunt() {
 
   local color="prompt:#FF6AC1,pointer:#FF6AC1,marker:#FF6AC1,hl:underline:#57C7FF,hl+:underline:#57C7FF:bold,border:#444444,label:#686868,preview-border:#444444,preview-label:#686868"
 
-  local kf="ctrl-t" kg="ctrl-g" kr="ctrl-r" ke="ctrl-e" kj="ctrl-j"
+  # Use alt- in Windows Terminal (which sets $WT_SESSION), ctrl- everywhere else
+  if [[ -n "$WT_SESSION" ]]; then
+    local kf="alt-f" kg="alt-g" kr="alt-r" ke="alt-e" kj="alt-j"
+  else
+    local kf="ctrl-f" kg="ctrl-g" kr="ctrl-r" ke="ctrl-e" kj="ctrl-j"
+  fi
   local header="${kf}:files  ${kg}:grep  ${kr}:recent  ${ke}:explore  ${kj}:jump  ctrl-/:preview"
 
   local result file line mode="files"
