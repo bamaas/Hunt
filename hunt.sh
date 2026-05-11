@@ -5,7 +5,7 @@ fi
 
 hunt() {
   emulate -L zsh
-  local -a fzf_opts=(--reverse --style full --preview-shell=bash)
+  local -a fzf_opts=(--reverse --style full)
 
   # ──────────────────────────────────────────────────────────────────────
   # Configuration via environment variables (all optional)
@@ -100,12 +100,13 @@ EOF
             --bind "${ke}:become(echo __EXPLORE__)" \
             --bind "change:reload:rg --line-number --no-heading --color=always --smart-case --hidden $rg_excludes -- {q} \"$dir\" || true" \
             --bind "ctrl-/:toggle-preview" \
-            --preview 'line={}
-              if [[ "$line" == *:*:* ]]; then
-                file=${line%%:*}; rest=${line#*:}; lineno=${rest%%:*}
+            --preview '
+              file=$(echo {} | cut -d: -f1)
+              lineno=$(echo {} | cut -d: -f2)
+              if [ -n "$lineno" ] && [ "$lineno" -gt 0 ] 2>/dev/null; then
                 bat --color=always --style=numbers --highlight-line "$lineno" "$file"
               else
-                bat --color=always --style=numbers "$line"
+                bat --color=always --style=numbers {}
               fi' \
             --preview-window=$preview_full
         ) || return
@@ -193,14 +194,12 @@ EOF
             --bind "change:reload:rg --line-number --no-heading --color=always --smart-case --hidden $rg_excludes -- {q} \"$dir\" || true" \
             --bind "ctrl-/:toggle-preview" \
             --preview '
-              line={}
-              if [[ "$line" == *:*:* ]]; then
-                file=${line%%:*}
-                rest=${line#*:}
-                lineno=${rest%%:*}
+              file=$(echo {} | cut -d: -f1)
+              lineno=$(echo {} | cut -d: -f2)
+              if [ -n "$lineno" ] && [ "$lineno" -gt 0 ] 2>/dev/null; then
                 bat --color=always --style=numbers --highlight-line "$lineno" "$file"
               else
-                bat --color=always --style=numbers "$line"
+                bat --color=always --style=numbers {}
               fi
             ' \
             --preview-window=$preview_full
