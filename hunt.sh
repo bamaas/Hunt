@@ -33,17 +33,17 @@ hunt() {
   local preview_full="${preview_window},${preview_border}"
 
   local fd_excludes="--exclude .git --exclude node_modules --exclude .cache --exclude target --exclude dist --exclude .venv --exclude __pycache__"
-  local rg_excludes="--glob '!.git' --glob '!node_modules' --glob '!.cache' --glob '!target' --glob '!dist' --glob '!.venv' --glob '!__pycache__'"
+  local rg_excludes="--glob '!.git' --glob '!node_modules' --glob '!.cache' --glob '!target' --glob '!dist' --glob '!.venv' --glob '!__pycache__' --colors 'line:fg:0x57,0xC7,0xFF'"
 
-  local color="prompt:#FF6AC1,pointer:#FF6AC1,marker:#FF6AC1,hl:underline:#57C7FF,hl+:underline:#57C7FF:bold,border:#444444,label:#686868,preview-border:#444444,preview-label:#686868"
+  local color="prompt:#FF6AC1,pointer:#FF6AC1,marker:#FF6AC1,hl:underline:#5AF78E,hl+:underline:#5AF78E:bold,border:#444444,label:#686868,preview-border:#444444,preview-label:#686868"
 
   # Use alt- in Windows Terminal (which sets $WT_SESSION), ctrl- everywhere else
   if [[ -n "$WT_SESSION" ]]; then
-    local kf="alt-f" kg="alt-g" kr="alt-r" ke="alt-e" kj="alt-j"
+    local kf="alt-f" kg="alt-g" kr="alt-r" ke="alt-e" kj="alt-j" kp="alt-/"
   else
-    local kf="ctrl-f" kg="ctrl-g" kr="ctrl-r" ke="ctrl-e" kj="ctrl-j"
+    local kf="ctrl-f" kg="ctrl-g" kr="ctrl-r" ke="ctrl-e" kj="ctrl-j" kp="ctrl-/"
   fi
-  local header="${kf}:files  ${kg}:grep  ${kr}:recent  ${ke}:explore  ${kj}:jump  ctrl-/:preview"
+  local header="${kf}:files  ${kg}:grep  ${kr}:recent  ${ke}:explore  ${kj}:jump  ${kp}:preview"
 
   local result file line mode="files"
   local browse_dir
@@ -99,7 +99,7 @@ EOF
             --bind "${kr}:change-prompt(recent> )+change-preview-window($preview_window)+clear-query+unbind(change)+reload(fd -t f --hidden $fd_excludes --changed-within 7d . \"$dir\")" \
             --bind "${ke}:become(echo __EXPLORE__)" \
             --bind "change:reload:rg --line-number --no-heading --color=always --smart-case --hidden $rg_excludes -- {q} \"$dir\" || true" \
-            --bind "ctrl-/:toggle-preview" \
+            --bind "${kp}:toggle-preview" \
             --preview '
               file=$(echo {} | cut -d: -f1)
               lineno=$(echo {} | cut -d: -f2)
@@ -148,7 +148,7 @@ EOF
             --bind "${kg}:become(echo __GREP__)" \
             --bind "${kr}:become(echo __RECENT__)" \
             --bind "esc:become(echo __UP__)" \
-            --bind "ctrl-/:toggle-preview" \
+            --bind "${kp}:toggle-preview" \
             --preview "
               entry={}
               name=\$(echo \"\$entry\" | sed 's/\x1b\[[0-9;]*m//g')
@@ -192,7 +192,7 @@ EOF
             --bind "${kr}:change-prompt(recent> )+change-preview-window($preview_window)+clear-query+unbind(change)+reload(fd -t f --hidden $fd_excludes --changed-within 7d . \"$dir\")" \
             --bind "${ke}:become(echo __EXPLORE__)" \
             --bind "change:reload:rg --line-number --no-heading --color=always --smart-case --hidden $rg_excludes -- {q} \"$dir\" || true" \
-            --bind "ctrl-/:toggle-preview" \
+            --bind "${kp}:toggle-preview" \
             --preview '
               file=$(echo {} | cut -d: -f1)
               lineno=$(echo {} | cut -d: -f2)
@@ -237,7 +237,11 @@ EOF
             --header $'ctrl-/:preview  enter:cd  esc:cancel'
         )
 
-        if [[ -n "$target" && -d "$target" ]]; then
+        if [[ -z "$target" ]]; then
+          return
+        fi
+
+        if [[ -d "$target" ]]; then
           cd "$target"
           dir="$PWD"
           browse_dir="$PWD"
