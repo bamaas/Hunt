@@ -77,13 +77,13 @@ EOF
             --info=hidden \
             --input-label ' Input ' --header-label ' Help ' \
             --bind 'result:transform-list-label:
-                if [[ -z $FZF_QUERY ]]; then
+                if [ -z "$FZF_QUERY" ]; then
                   echo " $FZF_MATCH_COUNT items "
                 else
                   echo " $FZF_MATCH_COUNT matches "
                 fi
                 ' \
-            --bind 'focus:transform-preview-label:[[ -n {} ]] && printf " Previewing [%s] " {}' \
+            --bind 'focus:transform-preview-label:[ -n {} ] && printf " Previewing [%s] " {}' \
             --height=100% \
             --layout=default \
             --delimiter=: \
@@ -136,7 +136,7 @@ EOF
             --input-label ' Input ' --header-label ' Help ' \
             --list-label " ${browse_dir} " \
             --bind "result:transform-list-label:echo ' ${browse_dir} · '\$FZF_MATCH_COUNT' items '" \
-            --bind 'focus:transform-preview-label:[[ -n {} ]] && printf " Previewing [%s] " {}' \
+            --bind 'focus:transform-preview-label:[ -n {} ] && printf " Previewing [%s] " {}' \
             --height=100% \
             --layout=default \
             --no-sort --tac \
@@ -152,9 +152,9 @@ EOF
               entry={}
               name=\$(echo \"\$entry\" | sed 's/\x1b\[[0-9;]*m//g')
               target=\"$browse_dir/\$name\"
-              if [[ -d \"\$target\" ]]; then
+              if [ -d \"\$target\" ]; then
                 tree -L 2 --dirsfirst -v -a --gitignore -C --filelimit 50 \"\$target\" 2>/dev/null
-              elif [[ -f \"\$target\" ]]; then
+              elif [ -f \"\$target\" ]; then
                 bat --color=always --style=numbers \"\$target\" 2>/dev/null || cat \"\$target\"
               fi
             " \
@@ -169,13 +169,13 @@ EOF
             --info=hidden \
             --input-label ' Input ' --header-label ' Help ' \
             --bind 'result:transform-list-label:
-                if [[ -z $FZF_QUERY ]]; then
+                if [ -z "$FZF_QUERY" ]; then
                   echo " $FZF_MATCH_COUNT items "
                 else
                   echo " $FZF_MATCH_COUNT matches "
                 fi
                 ' \
-            --bind 'focus:transform-preview-label:[[ -n {} ]] && printf " Previewing [%s] " {}' \
+            --bind 'focus:transform-preview-label:[ -n {} ] && printf " Previewing [%s] " {}' \
             --height=100% \
             --layout=default \
             --delimiter=: \
@@ -225,7 +225,7 @@ EOF
             --info=hidden \
             --input-label ' Input ' --header-label ' Help ' \
             --bind 'result:transform-list-label:
-                if [[ -z $FZF_QUERY ]]; then
+                if [ -z "$FZF_QUERY" ]; then
                   echo " $FZF_MATCH_COUNT items "
                 else
                   echo " $FZF_MATCH_COUNT matches "
