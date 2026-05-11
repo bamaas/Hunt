@@ -10,22 +10,23 @@ A fast, multi-mode file finder for the terminal. Built on [fzf](https://github.c
 curl -fsSL https://raw.githubusercontent.com/bamaas/Hunt/main/install.sh | bash
 ```
 
-Or manually:
+Or manually with [mise](https://mise.jdx.dev):
 
 ```sh
 # 1. Clone
 git clone https://github.com/bamaas/Hunt.git ~/.hunt
 
-# 2. Install dependencies globally from .mise/config.toml
-cd ~/.hunt && grep '=' .mise/config.toml | grep -v '^\[' | while IFS='=' read -r tool version; do
-  mise use -g "$(echo $tool | tr -d ' \"')@$(echo $version | tr -d ' \"')"
-done
+# 2. Symlink config into mise conf.d to install dependencies
+mkdir -p ~/.config/mise/conf.d
+ln -sf ~/.hunt/.mise/config.toml ~/.config/mise/conf.d/hunt.toml
+mise trust ~/.config/mise/conf.d/hunt.toml
+mise install
 
 # 3. Source
 echo 'source ~/.hunt/hunt.sh' >> ~/.zshrc
 ```
 
-### Manual
+### Without mise
 
 Install the dependencies with your package manager, then:
 
