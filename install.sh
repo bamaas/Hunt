@@ -57,7 +57,7 @@ SHELL_RC="$HOME/.zshrc"
 
 # Add mise activation if we just installed it
 if [[ "${MISE_INSTALLED:-false}" == "true" ]]; then
-  MISE_LINE='eval "$(mise activate zsh)"'
+  MISE_LINE='eval "$(~/.local/bin/mise activate zsh)"'
   if ! grep -qF "$MISE_LINE" "$SHELL_RC" 2>/dev/null; then
     echo "$MISE_LINE" >> "$SHELL_RC"
     echo "Added mise activation to $SHELL_RC"
