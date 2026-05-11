@@ -75,7 +75,7 @@ EOF
           fzf --ansi \
             --color="$color" \
             --info=hidden \
-            --input-label ' Input ' --header-label ' File Type ' \
+            --input-label ' Input ' --header-label ' Help ' \
             --bind 'result:transform-list-label:
                 if [[ -z $FZF_QUERY ]]; then
                   echo " $FZF_MATCH_COUNT items "
@@ -133,7 +133,7 @@ EOF
           } | fzf --ansi \
             --color="$color" \
             --info=hidden \
-            --input-label ' Input ' --header-label ' File Type ' \
+            --input-label ' Input ' --header-label ' Help ' \
             --list-label " ${browse_dir} " \
             --bind "result:transform-list-label:echo ' ${browse_dir} · '\$FZF_MATCH_COUNT' items '" \
             --bind 'focus:transform-preview-label:[[ -n {} ]] && printf " Previewing [%s] " {}' \
@@ -167,7 +167,7 @@ EOF
           fzf --ansi \
             --color="$color" \
             --info=hidden \
-            --input-label ' Input ' --header-label ' File Type ' \
+            --input-label ' Input ' --header-label ' Help ' \
             --bind 'result:transform-list-label:
                 if [[ -z $FZF_QUERY ]]; then
                   echo " $FZF_MATCH_COUNT items "
@@ -222,6 +222,15 @@ EOF
           zoxide query -l | fzf \
             --ansi \
             --color="$color" \
+            --info=hidden \
+            --input-label ' Input ' --header-label ' Help ' \
+            --bind 'result:transform-list-label:
+                if [[ -z $FZF_QUERY ]]; then
+                  echo " $FZF_MATCH_COUNT items "
+                else
+                  echo " $FZF_MATCH_COUNT matches "
+                fi
+                ' \
             --popup center,80%,50% \
             --height=100% \
             --layout=default \
