@@ -76,13 +76,14 @@ EOF
             --color="$color" \
             --info=hidden \
             --input-label ' Input ' --header-label ' Help ' \
-            --bind 'result:transform-list-label:
-                if [ -z "$FZF_QUERY" ]; then
-                  echo " $FZF_MATCH_COUNT items "
+            --list-label " ${browse_dir} " \
+            --bind "result:transform-list-label:
+                if [ -z \"\$FZF_QUERY\" ]; then
+                  echo \" ${browse_dir} · \$FZF_MATCH_COUNT items \"
                 else
-                  echo " $FZF_MATCH_COUNT matches "
+                  echo \" ${browse_dir} · \$FZF_MATCH_COUNT matches \"
                 fi
-                ' \
+                " \
             --bind 'focus:transform-preview-label:[ -n {} ] && printf " Previewing [%s] " {}' \
             --height=100% \
             --layout=default \
@@ -169,13 +170,14 @@ EOF
             --color="$color" \
             --info=hidden \
             --input-label ' Input ' --header-label ' Help ' \
-            --bind 'result:transform-list-label:
-                if [ -z "$FZF_QUERY" ]; then
-                  echo " $FZF_MATCH_COUNT items "
+            --list-label " ${browse_dir} " \
+            --bind "result:transform-list-label:
+                if [ -z \"\$FZF_QUERY\" ]; then
+                  echo \" ${browse_dir} · \$FZF_MATCH_COUNT items \"
                 else
-                  echo " $FZF_MATCH_COUNT matches "
+                  echo \" ${browse_dir} · \$FZF_MATCH_COUNT matches \"
                 fi
-                ' \
+                " \
             --bind 'focus:transform-preview-label:[ -n {} ] && printf " Previewing [%s] " {}' \
             --height=100% \
             --layout=default \
