@@ -128,7 +128,7 @@ EOF
                   if [[ -d "$browse_dir/$name" ]]; then
                     printf '\033[1;34m%s\033[0m\n' "$name"
                   else
-                    printf '\033[0;37m%s\033[0m\n' "$name"
+                    printf '%s\n' "$name"
                   fi
                 done
           } | fzf "${fzf_opts[@]}" --ansi \
