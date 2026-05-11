@@ -234,8 +234,13 @@ EOF
             --height=100% \
             --layout=default \
             --prompt="jump> " \
-            --header $'ctrl-/:preview  enter:cd  esc:cancel'
+            --header $'ctrl-/:preview  enter:cd  esc:back  ctrl-c:exit' \
+            --bind "esc:become(echo __BACK__)"
         )
+
+        if [[ "$target" == "__BACK__" ]]; then
+          continue
+        fi
 
         if [[ -z "$target" ]]; then
           return
