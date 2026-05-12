@@ -1,7 +1,7 @@
 # Hunt
 ### Hunt down anything, fast ⚡ 
 
-Stop juggling `find`, `grep`, and `cd`. Hunt gives you one command to search files, grep content, browse directories, and jump anywhere — all with instant preview. Built on [fzf](https://github.com/junegunn/fzf), switch modes with a keystroke and never leave your terminal flow.
+Stop juggling `find`, `grep`, and `cd`. Hunt gives you one command to search files, grep content, browse directories, and jump anywhere. Preview instantly and open any file straight into your editor. Built on [fzf](https://github.com/junegunn/fzf), switch modes with a keystroke. Hunt keeps you in the flow.
 
 ![hunt demo](./hunt-demo.gif)
 
