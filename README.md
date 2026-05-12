@@ -50,12 +50,6 @@ echo 'source ~/.hunt/hunt.sh' >> ~/.zshrc
 curl -fsSL https://raw.githubusercontent.com/bamaas/Hunt/main/install.sh | bash
 ```
 
-## Uninstall
-
-```sh
-~/.hunt/uninstall.sh
-```
-
 ## Usage
 
 ```sh
@@ -97,7 +91,7 @@ Keybindings adapt automatically: `ctrl-` on macOS/Linux, `alt-` in Windows Termi
 | `ctrl-r` / `alt-r` | Switch to recent mode |
 | `ctrl-e` / `alt-e` | Switch to explore mode |
 | `ctrl-j` / `alt-j` | Jump to directory (zoxide) |
-| `ctrl-/` / `alt-/` | Toggle preview |
+| `ctrl-p` / `alt-p` | Toggle preview |
 | `enter` | Open file in editor (or cd into directory in explore) |
 | `esc` | Go up a directory (explore mode) |
 | `ctrl-y` / `alt-y` | Copy selected file path to clipboard |
@@ -118,4 +112,10 @@ Optionally, add a short alias to your `~/.zshrc`:
 
 ```sh
 alias h="hunt "
+```
+
+## Uninstall
+
+```sh
+~/.hunt/uninstall.sh
 ```

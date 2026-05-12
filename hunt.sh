@@ -18,7 +18,7 @@ hunt() {
   #
   # Keybindings:
   #   ctrl-t:files  ctrl-g:grep  ctrl-r:recent  ctrl-e:explore  ctrl-j:jump
-  #   ctrl-/:toggle preview  ctrl-c:exit
+  #   ctrl-p:toggle preview  ctrl-c:exit
   #   In explore: enter=cd/open  esc=up
   # ──────────────────────────────────────────────────────────────────────
 
@@ -39,9 +39,9 @@ hunt() {
 
   # Use alt- in Windows Terminal (which sets $WT_SESSION), ctrl- everywhere else
   if [[ -n "$WT_SESSION" ]]; then
-    local kf="alt-f" kg="alt-g" kr="alt-r" ke="alt-e" kj="alt-j" kp="alt-/" ky="alt-y"
+    local kf="alt-f" kg="alt-g" kr="alt-r" ke="alt-e" kj="alt-j" kp="alt-p" ky="alt-y"
   else
-    local kf="ctrl-f" kg="ctrl-g" kr="ctrl-r" ke="ctrl-e" kj="ctrl-j" kp="ctrl-/" ky="ctrl-y"
+    local kf="ctrl-f" kg="ctrl-g" kr="ctrl-r" ke="ctrl-e" kj="ctrl-j" kp="ctrl-p" ky="ctrl-y"
   fi
   local header="${kf}:files  ${kg}:grep  ${kr}:recent  ${ke}:explore  ${kj}:jump  ${kp}:preview  ${ky}:copy"
 
@@ -230,7 +230,7 @@ EOF
             --height=100% \
             --layout=default \
             --prompt="jump> " \
-            --header $'ctrl-/:preview  enter:cd  esc:back  ctrl-c:exit' \
+            --header "ctrl-p:preview  enter:cd  esc:back  ctrl-c:exit" \
             --bind "esc:become(echo __BACK__)"
         )
 
