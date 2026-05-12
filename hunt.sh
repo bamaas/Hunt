@@ -35,7 +35,7 @@ hunt() {
   local fd_excludes="--exclude .git --exclude node_modules --exclude .cache --exclude target --exclude dist --exclude .venv --exclude __pycache__"
   local rg_excludes="--glob '!.git' --glob '!node_modules' --glob '!.cache' --glob '!target' --glob '!dist' --glob '!.venv' --glob '!__pycache__' --colors 'line:fg:0x57,0xC7,0xFF'"
 
-  local color="prompt:#FF6AC1,pointer:#FF6AC1,marker:#FF6AC1,fg:#999999,fg+:#FFFFFF,hl:underline:#5AF78E,hl+:underline:#5AF78E:bold,border:#444444,label:#686868,preview-border:#444444,preview-label:#686868"
+  local color="prompt:#FF6AC1,pointer:#FF6AC1,marker:#FF6AC1,fg:#BBBBBB,fg+:#FFFFFF,hl:underline:#5AF78E,hl+:underline:#5AF78E:bold,border:#444444,label:#686868,preview-border:#444444,preview-label:#686868"
 
   # Use alt- in Windows Terminal (which sets $WT_SESSION), ctrl- everywhere else
   if [[ -n "$WT_SESSION" ]]; then
@@ -84,7 +84,7 @@ EOF
                   echo \" ${browse_dir} · \$FZF_MATCH_COUNT matches \"
                 fi
                 " \
-            --bind 'focus:transform-preview-label:[ -n {} ] && printf " Previewing [%s] " {}' \
+            --bind 'focus:transform-preview-label:[ -n {1} ] && printf " Previewing [%s] " {1}' \
             --height=100% \
             --layout=default \
             --delimiter=: \
@@ -178,7 +178,7 @@ EOF
                   echo \" ${browse_dir} · \$FZF_MATCH_COUNT matches \"
                 fi
                 " \
-            --bind 'focus:transform-preview-label:[ -n {} ] && printf " Previewing [%s] " {}' \
+            --bind 'focus:transform-preview-label:[ -n {1} ] && printf " Previewing [%s] " {1}' \
             --height=100% \
             --layout=default \
             --delimiter=: \
