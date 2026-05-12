@@ -34,7 +34,7 @@ docker run --rm -it -e EDITOR=vim -v "$PWD":/workspace ghcr.io/bamaas/hunt:lates
 
 ### Without mise
 
-Install the dependencies with your package manager, then:
+Install the [dependencies](#dependencies) with your package manager, then:
 
 ```sh
 git clone https://github.com/bamaas/Hunt.git ~/.hunt
