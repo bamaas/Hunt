@@ -70,6 +70,13 @@ if [[ "${MISE_INSTALLED:-false}" == "true" ]]; then
   fi
 fi
 
+# Add zoxide init if not already present
+ZOXIDE_LINE='eval "$(zoxide init zsh)"'
+if ! grep -qF "$ZOXIDE_LINE" "$SHELL_RC" 2>/dev/null; then
+  echo "$ZOXIDE_LINE" >> "$SHELL_RC"
+  echo "Added zoxide init to $SHELL_RC"
+fi
+
 SOURCE_LINE="source $HUNT_DIR/hunt.sh"
 if [[ -f "$SHELL_RC" ]] && grep -qF "$SOURCE_LINE" "$SHELL_RC"; then
   echo "Already sourced in $SHELL_RC"
@@ -79,4 +86,4 @@ else
 fi
 
 echo ""
-echo "Done! Restart your shell or run: source $SHELL_RC"
+printf '\033[0;32m%s\033[0m\n' "Done! Restart your shell or run: source $SHELL_RC"

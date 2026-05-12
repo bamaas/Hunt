@@ -96,3 +96,9 @@ Environment variables (all optional):
 | `HUNT_EDITOR` | `$EDITOR` or `vim` | Editor to open files with |
 | `HUNT_PREVIEW_POSITION` | `right` | Preview position: `right`, `left`, `up`, `down` |
 | `HUNT_PREVIEW_SIZE` | `40` | Preview size as percentage (1-99) |
+
+Optionally, add a short alias to your `~/.zshrc`:
+
+```sh
+alias h="hunt "
+```
