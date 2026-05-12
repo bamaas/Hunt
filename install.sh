@@ -20,7 +20,7 @@ if [[ -d "$HUNT_DIR/.git" ]]; then
   git -C "$HUNT_DIR" pull --quiet
 elif [[ ! -d "$HUNT_DIR" ]]; then
   echo "Cloning Hunt..."
-  git clone --quiet "$REPO" "$HUNT_DIR"
+  git clone --quiet --depth 1 "$REPO" "$HUNT_DIR"
 fi
 
 # Ask about dependency installation
