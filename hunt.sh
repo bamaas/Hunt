@@ -52,6 +52,7 @@ hunt() {
   local last_grep_query=""
   local last_files_query=""
   local raw_result
+  local target
 
   __hunt_split() {
     local raw="$1"
@@ -209,8 +210,6 @@ EOF
 
     case "$result" in
       __JUMP__)
-        local target
-
         target=$(
           zoxide query -l | fzf "${fzf_opts[@]}" \
             --ansi \
@@ -261,7 +260,7 @@ EOF
     if [[ "$mode" == "explore" ]]; then
       [[ -z "$result" ]] && continue
 
-      local target="$browse_dir/$result"
+      target="$browse_dir/$result"
 
       if [[ -d "$target" ]]; then
         browse_dir=$(realpath "$target")
