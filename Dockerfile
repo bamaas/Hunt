@@ -6,7 +6,7 @@ ENV SHELL=/usr/bin/zsh
 ENV MISE_IGNORED_CONFIG_PATHS=/workspace
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    zsh git curl ca-certificates tree \
+    zsh git curl ca-certificates tree vim nano \
     && rm -rf /var/lib/apt/lists/*
 
 COPY . /root/.hunt

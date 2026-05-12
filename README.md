@@ -29,7 +29,7 @@ echo 'source ~/.hunt/hunt.sh' >> ~/.zshrc
 ### Docker
 
 ```sh
-docker run --rm -it -v "$PWD":/workspace ghcr.io/bamaas/hunt:latest
+docker run --rm -it -e EDITOR=vim -v "$PWD":/workspace ghcr.io/bamaas/hunt:latest
 ```
 
 ### Without mise
@@ -82,7 +82,7 @@ Keybindings adapt automatically: `ctrl-` on macOS/Linux, `alt-` in Windows Termi
 | `ctrl-r` / `alt-r` | Switch to recent mode |
 | `ctrl-e` / `alt-e` | Switch to explore mode |
 | `ctrl-j` / `alt-j` | Jump to directory (zoxide) |
-| `ctrl-/` | Toggle preview |
+| `ctrl-/` / `alt-/` | Toggle preview |
 | `enter` | Open file in editor (or cd into directory in explore) |
 | `esc` | Go up a directory (explore mode) |
 | `ctrl-c` | Exit |
