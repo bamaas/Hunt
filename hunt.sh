@@ -85,7 +85,7 @@ EOF
                   echo \" ${browse_dir} · \$FZF_MATCH_COUNT matches \"
                 fi
                 " \
-            --bind 'focus:transform-preview-label:[ -n {1} ] && printf " Previewing [%s] " {1}' \
+            --bind "focus:change-header-label( Help )+transform-preview-label([ -n {1} ] && printf ' Previewing [%s] ' {1})" \
             --height=100% \
             --layout=default \
             --delimiter=: \
@@ -102,7 +102,7 @@ EOF
             --bind "${ke}:become(echo __EXPLORE__)" \
             --bind "change:reload:rg --line-number --no-heading --color=always --smart-case --hidden $rg_excludes -- {q} \"$dir\" || true" \
             --bind "${kp}:toggle-preview" \
-            --bind "${ky}:execute-silent(echo -n {1} | pbcopy 2>/dev/null || echo -n {1} | wl-copy 2>/dev/null || echo -n {1} | xclip -selection clipboard 2>/dev/null || echo -n {1} | xsel --clipboard --input 2>/dev/null)" \
+            --bind "${ky}:execute-silent(echo -n {1} | pbcopy 2>/dev/null || echo -n {1} | wl-copy 2>/dev/null || echo -n {1} | xclip -selection clipboard 2>/dev/null || echo -n {1} | xsel --clipboard --input 2>/dev/null)+transform-header-label([ \"\$FZF_MATCH_COUNT\" != \"0\" ] && printf '\033[32m ✓ Copied \033[0m' || printf ' Help ')" \
             --preview '
               file=$(echo {} | cut -d: -f1)
               lineno=$(echo {} | cut -d: -f2)
@@ -132,7 +132,7 @@ EOF
             --input-label ' Input ' --header-label ' Help ' \
             --list-label " ${browse_dir} " \
             --bind "result:transform-list-label:echo ' ${browse_dir} · '\$FZF_MATCH_COUNT' items '" \
-            --bind 'focus:transform-preview-label:[ -n {} ] && printf " Previewing [%s] " {}' \
+            --bind "focus:change-header-label( Help )+transform-preview-label([ -n {} ] && printf ' Previewing [%s] ' {})" \
             --height=100% \
             --layout=default \
             --no-sort --tac \
@@ -144,7 +144,7 @@ EOF
             --bind "${kr}:become(echo __RECENT__)" \
             --bind "esc:become(echo __UP__)" \
             --bind "${kp}:toggle-preview" \
-            --bind "${ky}:execute-silent(name=\$(echo {} | sed 's/\x1b\[[0-9;]*m//g'); printf '%s' \"$browse_dir/\$name\" | pbcopy 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | wl-copy 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | xclip -selection clipboard 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | xsel --clipboard --input 2>/dev/null)" \
+            --bind "${ky}:execute-silent(name=\$(echo {} | sed 's/\x1b\[[0-9;]*m//g'); printf '%s' \"$browse_dir/\$name\" | pbcopy 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | wl-copy 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | xclip -selection clipboard 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | xsel --clipboard --input 2>/dev/null)+transform-header-label([ \"\$FZF_MATCH_COUNT\" != \"0\" ] && printf '\033[32m ✓ Copied \033[0m' || printf ' Help ')" \
             --preview "
               entry={}
               name=\$(echo \"\$entry\" | sed 's/\x1b\[[0-9;]*m//g')
@@ -173,7 +173,7 @@ EOF
                   echo \" ${browse_dir} · \$FZF_MATCH_COUNT matches \"
                 fi
                 " \
-            --bind 'focus:transform-preview-label:[ -n {1} ] && printf " Previewing [%s] " {1}' \
+            --bind "focus:change-header-label( Help )+transform-preview-label([ -n {1} ] && printf ' Previewing [%s] ' {1})" \
             --height=100% \
             --layout=default \
             --delimiter=: \
@@ -190,7 +190,7 @@ EOF
             --bind "${ke}:become(echo __EXPLORE__)" \
             --bind "change:reload:rg --line-number --no-heading --color=always --smart-case --hidden $rg_excludes -- {q} \"$dir\" || true" \
             --bind "${kp}:toggle-preview" \
-            --bind "${ky}:execute-silent(echo -n {1} | pbcopy 2>/dev/null || echo -n {1} | wl-copy 2>/dev/null || echo -n {1} | xclip -selection clipboard 2>/dev/null || echo -n {1} | xsel --clipboard --input 2>/dev/null)" \
+            --bind "${ky}:execute-silent(echo -n {1} | pbcopy 2>/dev/null || echo -n {1} | wl-copy 2>/dev/null || echo -n {1} | xclip -selection clipboard 2>/dev/null || echo -n {1} | xsel --clipboard --input 2>/dev/null)+transform-header-label([ \"\$FZF_MATCH_COUNT\" != \"0\" ] && printf '\033[32m ✓ Copied \033[0m' || printf ' Help ')" \
             --preview '
               file=$(echo {} | cut -d: -f1)
               lineno=$(echo {} | cut -d: -f2)
