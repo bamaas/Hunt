@@ -281,6 +281,7 @@ EOF
       rest=${result#*:}
       line=${rest%%:*}
       mode="grep"
+      last_grep_query="$last_files_query"
       "$editor" +"$line" "$file"
     else
       mode="files"
