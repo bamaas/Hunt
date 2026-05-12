@@ -3,6 +3,8 @@ set -euo pipefail
 
 HUNT_DIR="${HUNT_DIR:-$HOME/.hunt}"
 REPO="https://github.com/bamaas/Hunt.git"
+AUTO=false
+[[ "${1:-}" == "--yes" ]] && AUTO=true
 
 if [[ "$SHELL" != */zsh ]]; then
   echo "Hunt requires zsh as your default shell." >&2
@@ -13,20 +15,24 @@ fi
 echo "Installing Hunt..."
 
 # Clone or update
-if [[ -d "$HUNT_DIR" ]]; then
+if [[ -d "$HUNT_DIR/.git" ]]; then
   echo "Updating Hunt..."
   git -C "$HUNT_DIR" pull --quiet
-else
+elif [[ ! -d "$HUNT_DIR" ]]; then
   echo "Cloning Hunt..."
   git clone --quiet "$REPO" "$HUNT_DIR"
 fi
 
 # Ask about dependency installation
-echo ""
-echo "Hunt requires: fzf, fd, ripgrep, bat, zoxide, tree, zsh"
-echo ""
-echo "Install dependencies automatically with mise (https://mise.jdx.dev)? (y/n)"
-read -r answer
+if [[ "$AUTO" == "true" ]]; then
+  answer="y"
+else
+  echo ""
+  echo "Hunt requires: fzf, fd, ripgrep, bat, zoxide, tree, zsh"
+  echo ""
+  echo "Install dependencies automatically with mise (https://mise.jdx.dev)? (y/n)"
+  read -r answer
+fi
 
 if [[ "$answer" =~ ^[Yy]$ ]]; then
   # Install mise if needed

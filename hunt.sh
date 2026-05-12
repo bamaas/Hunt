@@ -1,9 +1,9 @@
-if [[ -z "$ZSH_VERSION" ]]; then
-  echo "Hunt requires zsh. Please run in a zsh shell." >&2
-  return 1
-fi
-
 hunt() {
+  if [[ -z "$ZSH_VERSION" ]]; then
+    echo "Hunt requires zsh. Please run in a zsh shell." >&2
+    return 1
+  fi
+
   emulate -L zsh
   local -a fzf_opts=(--reverse --style full)
 
