@@ -28,7 +28,7 @@ if [[ "$AUTO" == "true" ]]; then
   answer="y"
 else
   echo ""
-  echo "Hunt requires: fzf, fd, ripgrep, bat, zoxide, tree, zsh"
+  echo "Hunt requires: fzf, fd, ripgrep, bat, zoxide, eza, zsh"
   echo ""
   echo "Install dependencies automatically with mise (https://mise.jdx.dev)? (y/n)"
   read -r answer < /dev/tty
@@ -55,7 +55,7 @@ if [[ "$answer" =~ ^[Yy]$ ]]; then
   mise install -C "$HUNT_DIR" --yes
 else
   echo "Skipping dependency installation."
-  echo "Make sure the following are installed: fzf, fd, ripgrep, bat, zoxide, tree, zsh"
+  echo "Make sure the following are installed: fzf, fd, ripgrep, bat, zoxide, eza, zsh"
 fi
 
 # Add to shell config

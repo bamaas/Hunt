@@ -123,15 +123,7 @@ EOF
         printf '\033[2J\033[H'
         result=$(
           {
-            \ls -A --group-directories-first --color=never "$browse_dir" 2>/dev/null \
-              | grep -v '^\.git$' \
-              | while IFS= read -r name; do
-                  if [[ -d "$browse_dir/$name" ]]; then
-                    printf '\033[1;34m%s\033[0m\n' "$name"
-                  else
-                    printf '%s\n' "$name"
-                  fi
-                done
+            EZA_COLORS='reset:di=38;2;87;199;255:fi=0:ex=0:ln=0:or=0:pi=0:so=0:bd=0:cd=0' eza --all --group-directories-first --git-ignore --color=always "$browse_dir" | grep -v '^\.git$'
           } | fzf "${fzf_opts[@]}" --ansi \
             --color="$color" \
             --info=hidden \
@@ -155,7 +147,7 @@ EOF
               name=\$(echo \"\$entry\" | sed 's/\x1b\[[0-9;]*m//g')
               target=\"$browse_dir/\$name\"
               if [ -d \"\$target\" ]; then
-                tree -L 2 --dirsfirst -v -a --gitignore -C --filelimit 50 \"\$target\" 2>/dev/null
+                EZA_COLORS='reset:di=38;2;87;199;255:fi=0:ex=0:ln=0:or=0:pi=0:so=0:bd=0:cd=0' eza --tree --level=2 --group-directories-first --all --git-ignore --color=always \"\$target\" 2>/dev/null
               elif [ -f \"\$target\" ]; then
                 bat --color=always --style=numbers \"\$target\" 2>/dev/null || cat \"\$target\"
               fi

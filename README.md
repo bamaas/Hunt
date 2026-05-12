@@ -58,7 +58,7 @@ hunt ~/projects
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
 - [bat](https://github.com/sharkdp/bat)
 - [zoxide](https://github.com/ajeetdsouza/zoxide)
-- [tree](https://linux.die.net/man/1/tree) (for explore preview)
+- [eza](https://github.com/eza-community/eza) (for explore preview)
 - zsh
 
 ## Modes
