@@ -39,11 +39,11 @@ hunt() {
 
   # Use alt- in Windows Terminal (which sets $WT_SESSION), ctrl- everywhere else
   if [[ -n "$WT_SESSION" ]]; then
-    local kf="alt-f" kg="alt-g" kr="alt-r" ke="alt-e" kj="alt-j" kp="alt-/"
+    local kf="alt-f" kg="alt-g" kr="alt-r" ke="alt-e" kj="alt-j" kp="alt-/" ky="alt-y"
   else
-    local kf="ctrl-f" kg="ctrl-g" kr="ctrl-r" ke="ctrl-e" kj="ctrl-j" kp="ctrl-/"
+    local kf="ctrl-f" kg="ctrl-g" kr="ctrl-r" ke="ctrl-e" kj="ctrl-j" kp="ctrl-/" ky="ctrl-y"
   fi
-  local header="${kf}:files  ${kg}:grep  ${kr}:recent  ${ke}:explore  ${kj}:jump  ${kp}:preview"
+  local header="${kf}:files  ${kg}:grep  ${kr}:recent  ${ke}:explore  ${kj}:jump  ${kp}:preview  ${ky}:copy"
 
   local result file line mode="files"
   local browse_dir
@@ -102,6 +102,7 @@ EOF
             --bind "${ke}:become(echo __EXPLORE__)" \
             --bind "change:reload:rg --line-number --no-heading --color=always --smart-case --hidden $rg_excludes -- {q} \"$dir\" || true" \
             --bind "${kp}:toggle-preview" \
+            --bind "${ky}:execute-silent(echo -n {1} | pbcopy 2>/dev/null || echo -n {1} | wl-copy 2>/dev/null || echo -n {1} | xclip -selection clipboard 2>/dev/null || echo -n {1} | xsel --clipboard --input 2>/dev/null)" \
             --preview '
               file=$(echo {} | cut -d: -f1)
               lineno=$(echo {} | cut -d: -f2)
@@ -143,6 +144,7 @@ EOF
             --bind "${kr}:become(echo __RECENT__)" \
             --bind "esc:become(echo __UP__)" \
             --bind "${kp}:toggle-preview" \
+            --bind "${ky}:execute-silent(name=\$(echo {} | sed 's/\x1b\[[0-9;]*m//g'); printf '%s' \"$browse_dir/\$name\" | pbcopy 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | wl-copy 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | xclip -selection clipboard 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | xsel --clipboard --input 2>/dev/null)" \
             --preview "
               entry={}
               name=\$(echo \"\$entry\" | sed 's/\x1b\[[0-9;]*m//g')
@@ -188,6 +190,7 @@ EOF
             --bind "${ke}:become(echo __EXPLORE__)" \
             --bind "change:reload:rg --line-number --no-heading --color=always --smart-case --hidden $rg_excludes -- {q} \"$dir\" || true" \
             --bind "${kp}:toggle-preview" \
+            --bind "${ky}:execute-silent(echo -n {1} | pbcopy 2>/dev/null || echo -n {1} | wl-copy 2>/dev/null || echo -n {1} | xclip -selection clipboard 2>/dev/null || echo -n {1} | xsel --clipboard --input 2>/dev/null)" \
             --preview '
               file=$(echo {} | cut -d: -f1)
               lineno=$(echo {} | cut -d: -f2)

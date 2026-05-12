@@ -44,6 +44,18 @@ git clone https://github.com/bamaas/Hunt.git ~/.hunt
 echo 'source ~/.hunt/hunt.sh' >> ~/.zshrc
 ```
 
+## Update
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/bamaas/Hunt/main/install.sh | bash
+```
+
+## Uninstall
+
+```sh
+~/.hunt/uninstall.sh
+```
+
 ## Usage
 
 ```sh
@@ -88,6 +100,7 @@ Keybindings adapt automatically: `ctrl-` on macOS/Linux, `alt-` in Windows Termi
 | `ctrl-/` / `alt-/` | Toggle preview |
 | `enter` | Open file in editor (or cd into directory in explore) |
 | `esc` | Go up a directory (explore mode) |
+| `ctrl-y` / `alt-y` | Copy selected file path to clipboard |
 | `ctrl-c` | Exit |
 
 ## Configuration
@@ -99,6 +112,7 @@ Environment variables (all optional):
 | `HUNT_EDITOR` | `$EDITOR` or `vim` | Editor to open files with |
 | `HUNT_PREVIEW_POSITION` | `right` | Preview position: `right`, `left`, `up`, `down` |
 | `HUNT_PREVIEW_SIZE` | `40` | Preview size as percentage (1-99) |
+| `HUNT_DIR` | `~/.hunt` | Installation directory for Hunt |
 
 Optionally, add a short alias to your `~/.zshrc`:
 

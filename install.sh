@@ -59,30 +59,38 @@ else
 fi
 
 # Add to shell config
-SHELL_RC="$HOME/.zshrc"
+SHELL_RC="${ZDOTDIR:-$HOME}/.zshrc"
 
-# Add mise activation if we just installed it
-if [[ "${MISE_INSTALLED:-false}" == "true" ]]; then
-  MISE_LINE='eval "$(~/.local/bin/mise activate zsh)"'
-  if ! grep -qF "$MISE_LINE" "$SHELL_RC" 2>/dev/null; then
-    echo "$MISE_LINE" >> "$SHELL_RC"
-    echo "Added mise activation to $SHELL_RC"
-  fi
+# Backup shell config before modifying
+cp "$SHELL_RC" "${SHELL_RC}.hunt.bak" 2>/dev/null || true
+echo "Backed up $SHELL_RC to ${SHELL_RC}.hunt.bak"
+
+# Add mise activation if Hunt just installed it AND not already present
+if [[ "${MISE_INSTALLED:-false}" == "true" ]] && ! grep -q "mise activate" "$SHELL_RC" 2>/dev/null; then
+  echo 'eval "$(~/.local/bin/mise activate zsh)"' >> "$SHELL_RC"
+  echo "Added mise activation to $SHELL_RC"
 fi
 
 # Add zoxide init if not already present
-ZOXIDE_LINE='eval "$(zoxide init zsh)"'
-if ! grep -qF "$ZOXIDE_LINE" "$SHELL_RC" 2>/dev/null; then
-  echo "$ZOXIDE_LINE" >> "$SHELL_RC"
+if ! grep -q "zoxide init" "$SHELL_RC" 2>/dev/null; then
+  echo 'eval "$(zoxide init zsh)"' >> "$SHELL_RC"
   echo "Added zoxide init to $SHELL_RC"
 fi
 
-SOURCE_LINE="source $HUNT_DIR/hunt.sh"
-if [[ -f "$SHELL_RC" ]] && grep -qF "$SOURCE_LINE" "$SHELL_RC"; then
-  echo "Already sourced in $SHELL_RC"
+# Add Hunt block (idempotent) — only contains what Hunt owns
+HUNT_BEGIN="# >>> Hunt >>>"
+HUNT_END="# <<< Hunt <<<"
+
+if grep -qF "$HUNT_BEGIN" "$SHELL_RC" 2>/dev/null; then
+  echo "Hunt block already present in $SHELL_RC"
 else
-  echo "$SOURCE_LINE" >> "$SHELL_RC"
-  echo "Added to $SHELL_RC"
+  {
+    echo ""
+    echo "$HUNT_BEGIN"
+    echo "source $HUNT_DIR/hunt.sh"
+    echo "$HUNT_END"
+  } >> "$SHELL_RC"
+  echo "Added Hunt block to $SHELL_RC"
 fi
 
 echo ""
