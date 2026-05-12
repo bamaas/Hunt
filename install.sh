@@ -31,7 +31,7 @@ else
   echo "Hunt requires: fzf, fd, ripgrep, bat, zoxide, tree, zsh"
   echo ""
   echo "Install dependencies automatically with mise (https://mise.jdx.dev)? (y/n)"
-  read -r answer
+  read -r answer < /dev/tty
 fi
 
 if [[ "$answer" =~ ^[Yy]$ ]]; then

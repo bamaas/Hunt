@@ -13,4 +13,4 @@ COPY . /root/.hunt
 RUN SHELL=/usr/bin/zsh bash /root/.hunt/install.sh --yes
 
 WORKDIR /workspace
-ENTRYPOINT ["/usr/bin/zsh", "-ic", "hunt"]
+ENTRYPOINT ["/usr/bin/zsh", "-ic", "hunt \"$@\"", "--"]
