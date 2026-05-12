@@ -12,14 +12,13 @@ if [[ "$SHELL" != */zsh ]]; then
   exit 1
 fi
 
-echo "Installing Hunt..."
-
 # Clone or update
 if [[ -d "$HUNT_DIR/.git" ]]; then
   echo "Updating Hunt..."
   git -C "$HUNT_DIR" pull --quiet
 elif [[ ! -d "$HUNT_DIR" ]]; then
-  echo "Cloning Hunt..."
+  echo "Installing Hunt..."
+  echo "Cloning repository..."
   git clone --quiet --depth 1 "$REPO" "$HUNT_DIR"
 fi
 
