@@ -4,6 +4,5 @@
 "github:junegunn/fzf" = "0.72.0"
 "github:sharkdp/fd" = "v10.4.2"
 "github:burntsushi/ripgrep" = "15.1.0"
-"github:sxyazi/yazi" = "v26.1.22"
 "zoxide" = "0.9.9"
 "github:eza-community/eza" = "v0.21.3"
