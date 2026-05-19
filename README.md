@@ -7,7 +7,9 @@ Stop juggling `find`, `grep`, and `cd`. Hunt gives you one command to search fil
 
 ## Install
 
-### With mise (recommended, easiest)
+### Mise
+
+One-click install script:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/bamaas/Hunt/main/install.sh | bash
