@@ -34,7 +34,7 @@ echo 'source ~/.hunt/hunt.sh' >> ~/.zshrc
 ### Homebrew
 
 ```sh
-brew tap bamaas/hunt
+brew tap bamaas/hunt https://github.com/bamaas/Hunt
 brew install hunt
 echo 'source $(brew --prefix)/share/hunt/hunt.sh' >> ~/.zshrc
 ```
