@@ -7,7 +7,7 @@ Stop juggling `find`, `grep`, and `cd`. Hunt gives you one command to search fil
 
 ## Install
 
-### With mise (recommended)
+### With mise (recommended, easiest)
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/bamaas/Hunt/main/install.sh | bash
@@ -29,13 +29,25 @@ mise install
 echo 'source ~/.hunt/hunt.sh' >> ~/.zshrc
 ```
 
+> Make sure [zoxide](https://github.com/ajeetdsouza/zoxide) is initialized in your `~/.zshrc` (e.g. `eval "$(zoxide init zsh)"`) for the jump mode to work.
+
+### Homebrew
+
+```sh
+brew tap bamaas/hunt
+brew install hunt
+echo 'source $(brew --prefix)/share/hunt/hunt.sh' >> ~/.zshrc
+```
+
+> Make sure [zoxide](https://github.com/ajeetdsouza/zoxide) is initialized in your `~/.zshrc` (e.g. `eval "$(zoxide init zsh)"`) for the jump mode to work.
+
 ### Docker
 
 ```sh
 docker run --rm -it -e EDITOR=vim -v "$PWD":/workspace ghcr.io/bamaas/hunt:latest
 ```
 
-### Without mise
+### Manually
 
 Install the [dependencies](#dependencies) with your package manager, then:
 
@@ -44,11 +56,7 @@ git clone https://github.com/bamaas/Hunt.git ~/.hunt
 echo 'source ~/.hunt/hunt.sh' >> ~/.zshrc
 ```
 
-## Update
-
-```sh
-curl -fsSL https://raw.githubusercontent.com/bamaas/Hunt/main/install.sh | bash
-```
+> Make sure [zoxide](https://github.com/ajeetdsouza/zoxide) is initialized in your `~/.zshrc` (e.g. `eval "$(zoxide init zsh)"`) for the jump mode to work.
 
 ## Usage
 
@@ -114,8 +122,33 @@ Optionally, add a short alias to your `~/.zshrc`:
 alias h="hunt "
 ```
 
+## Update
+
+### With mise
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/bamaas/Hunt/main/install.sh | bash
+```
+
+### Homebrew
+
+```sh
+brew update && brew upgrade hunt
+```
+
 ## Uninstall
+
+### With mise
 
 ```sh
 ~/.hunt/uninstall.sh
 ```
+
+### Homebrew
+
+```sh
+brew uninstall hunt
+brew untap bamaas/hunt
+```
+
+Then remove the `source ...hunt.sh` line from your `~/.zshrc`.

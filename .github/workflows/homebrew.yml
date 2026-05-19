@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.ref_name }}
+        run: gh release create "$TAG" --generate-notes
+
+      - name: Update Homebrew formula
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          VERSION="${TAG#v}"
+          URL="https://github.com/${{ github.repository }}/archive/refs/tags/${TAG}.tar.gz"
+          SHA=$(curl -sL "$URL" | shasum -a 256 | awk '{print $1}')
+
+          sed -i "s|url \".*\"|url \"${URL}\"|" Formula/hunt.rb
+          sed -i "s|.*sha256.*|  sha256 \"${SHA}\"|" Formula/hunt.rb
+          sed -i "s|version \".*\"|version \"${VERSION}\"|" Formula/hunt.rb
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Formula/hunt.rb
+          git diff --cached --quiet && exit 0
+          git commit -m "Update Homebrew formula to ${TAG}"
+          git push
