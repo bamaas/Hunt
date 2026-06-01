@@ -34,7 +34,7 @@ fi
 echo ""
 echo "Note: mise and zoxide were left installed."
 echo "If you no longer need them, remove manually:"
-echo "  mise:   run 'mise implode' and remove 'mise activate' from $SHELLRC "
+echo "  mise:   run 'mise implode' and remove 'mise activate' from $SHELL_RC"
 echo "  zoxide: remove 'zoxide init' from $SHELL_RC"
 echo ""
 printf '\033[0;32m%s\033[0m\n' "Done! Restart your shell or run: source $SHELL_RC"
