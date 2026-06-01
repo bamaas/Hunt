@@ -102,7 +102,7 @@ EOF
             --bind "${ke}:become(echo __EXPLORE__)" \
             --bind "change:reload:rg --line-number --no-heading --color=always --smart-case --hidden $rg_excludes -- {q} \"$dir\" || true" \
             --bind "${kp}:toggle-preview" \
-            --bind "${ky}:execute-silent(echo -n {1} | pbcopy 2>/dev/null || echo -n {1} | wl-copy 2>/dev/null || echo -n {1} | xclip -selection clipboard 2>/dev/null || echo -n {1} | xsel --clipboard --input 2>/dev/null)+transform-input-label([ \"\$FZF_MATCH_COUNT\" != \"0\" ] && printf '\033[32m ✓ Copied \033[0m' || printf ' Input ')" \
+            --bind "${ky}:execute-silent([ -n \"\$WSL_DISTRO_NAME\" ] && echo -n {1} | clip.exe 2>/dev/null || echo -n {1} | pbcopy 2>/dev/null || echo -n {1} | wl-copy 2>/dev/null || echo -n {1} | xclip -selection clipboard 2>/dev/null || echo -n {1} | xsel --clipboard --input 2>/dev/null)+transform-input-label([ \"\$FZF_MATCH_COUNT\" != \"0\" ] && printf '\033[32m ✓ Copied \033[0m' || printf ' Input ')" \
             --preview '
               file=$(echo {} | cut -d: -f1)
               lineno=$(echo {} | cut -d: -f2)
@@ -144,7 +144,7 @@ EOF
             --bind "${kr}:become(echo __RECENT__)" \
             --bind "esc:become(echo __UP__)" \
             --bind "${kp}:toggle-preview" \
-            --bind "${ky}:execute-silent(name=\$(echo {} | sed 's/\x1b\[[0-9;]*m//g'); printf '%s' \"$browse_dir/\$name\" | pbcopy 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | wl-copy 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | xclip -selection clipboard 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | xsel --clipboard --input 2>/dev/null)+transform-input-label([ \"\$FZF_MATCH_COUNT\" != \"0\" ] && printf '\033[32m ✓ Copied \033[0m' || printf ' Input ')" \
+            --bind "${ky}:execute-silent(name=\$(echo {} | sed 's/\x1b\[[0-9;]*m//g'); [ -n \"\$WSL_DISTRO_NAME\" ] && printf '%s' \"$browse_dir/\$name\" | clip.exe 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | pbcopy 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | wl-copy 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | xclip -selection clipboard 2>/dev/null || printf '%s' \"$browse_dir/\$name\" | xsel --clipboard --input 2>/dev/null)+transform-input-label([ \"\$FZF_MATCH_COUNT\" != \"0\" ] && printf '\033[32m ✓ Copied \033[0m' || printf ' Input ')" \
             --preview "
               entry={}
               name=\$(echo \"\$entry\" | sed 's/\x1b\[[0-9;]*m//g')
@@ -190,7 +190,7 @@ EOF
             --bind "${ke}:become(echo __EXPLORE__)" \
             --bind "change:reload:rg --line-number --no-heading --color=always --smart-case --hidden $rg_excludes -- {q} \"$dir\" || true" \
             --bind "${kp}:toggle-preview" \
-            --bind "${ky}:execute-silent(echo -n {1} | pbcopy 2>/dev/null || echo -n {1} | wl-copy 2>/dev/null || echo -n {1} | xclip -selection clipboard 2>/dev/null || echo -n {1} | xsel --clipboard --input 2>/dev/null)+transform-input-label([ \"\$FZF_MATCH_COUNT\" != \"0\" ] && printf '\033[32m ✓ Copied \033[0m' || printf ' Input ')" \
+            --bind "${ky}:execute-silent([ -n \"\$WSL_DISTRO_NAME\" ] && echo -n {1} | clip.exe 2>/dev/null || echo -n {1} | pbcopy 2>/dev/null || echo -n {1} | wl-copy 2>/dev/null || echo -n {1} | xclip -selection clipboard 2>/dev/null || echo -n {1} | xsel --clipboard --input 2>/dev/null)+transform-input-label([ \"\$FZF_MATCH_COUNT\" != \"0\" ] && printf '\033[32m ✓ Copied \033[0m' || printf ' Input ')" \
             --preview '
               file=$(echo {} | cut -d: -f1)
               lineno=$(echo {} | cut -d: -f2)
