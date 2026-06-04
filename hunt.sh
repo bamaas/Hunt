@@ -244,7 +244,7 @@ EOF
 
         if [[ -d "$target" ]]; then
           cd "$target"
-          dir="$PWD"
+          dir="."
           browse_dir="$PWD"
           last_files_query=""
           last_grep_query=""
