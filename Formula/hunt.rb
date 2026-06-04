@@ -1,9 +1,9 @@
 class Hunt < Formula
   desc "Fuzzy finder for files, grep, directories, and zoxide jump - all in one"
   homepage "https://github.com/bamaas/Hunt"
-  url "https://github.com/bamaas/Hunt/archive/refs/tags/v0.1.2.tar.gz"
-  version "0.1.2"
-  sha256 "0b53a1067222470b5e520ea27e2416a02696fa543699a60c906b945d57468f11"
+  url "https://github.com/bamaas/Hunt/archive/refs/tags/v0.1.3.tar.gz"
+  version "0.1.3"
+  sha256 "fecca50989542df2b4c64182e5b66df780522db74e85c22fda57788fc43fe98e"
 
   depends_on "fzf"
   depends_on "fd"
